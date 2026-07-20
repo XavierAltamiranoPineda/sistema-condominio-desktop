@@ -1,0 +1,74 @@
+name: Build Desktop Application
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+
+  build-linux:
+
+    name: Build Linux AppImage
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+
+      - name: Install dependencies
+        run: npm install
+
+
+      - name: Build Linux AppImage
+        run: npm run dist
+
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-appimage
+          path: release/*.AppImage
+
+
+
+  build-windows:
+
+    name: Build Windows Installer
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+
+      - name: Install dependencies
+        run: npm install
+
+
+      - name: Build Windows Installer
+        run: npm run dist
+
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: release/*.exe
