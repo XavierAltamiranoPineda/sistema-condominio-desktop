@@ -5,6 +5,6 @@ export const useReporteGeneral = () => {
   return useQuery({
     queryKey: ['reporte-general'],
     queryFn: reporteService.obtenerReporteGeneral,
-    refetchInterval: 30000, // Actualización automática cada 30 segundos
+    // Hereda refetchInterval: 8000 del QueryClient global
   });
 };
