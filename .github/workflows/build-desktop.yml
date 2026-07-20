@@ -22,11 +22,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+         
 
 
       - name: Install dependencies
         run: npm install
+
+
+      - name: Clean build
+        shell: bash
+        run: |
+          rm -rf dist
+          rm -rf dist-electron
+          rm -rf release
 
 
       - name: Build Linux AppImage
@@ -61,6 +69,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+
+      - name: Clean build
+        shell: bash
+        run: |
+          rm -rf dist
+          rm -rf dist-electron
+          rm -rf release
 
 
       - name: Build Windows Installer

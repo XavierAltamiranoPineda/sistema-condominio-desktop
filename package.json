@@ -47,6 +47,7 @@
     "wait-on": "^9.0.10"
   },
   "build": {
+    "artifactName": "Sistema-Condominio-${version}.${ext}",
     "appId": "com.residencial.sistema",
     "productName": "Sistema-Condominio",
     "asar": false,
