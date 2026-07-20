@@ -1,7 +1,9 @@
 {
   "name": "sistema-condominio-desktop",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Sistema de gestión residencial con Web y Desktop",
+  "author": "Equipo Sistema Condominio",
   "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
@@ -9,7 +11,7 @@
     "electron:build": "tsc -p electron/tsconfig.json",
     "electron": "concurrently \"npm run dev\" \"npm run electron:build && wait-on http://localhost:5173 && electron .\"",
     "build": "tsc -b && vite build",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && npm run electron:build && electron-builder"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -46,17 +48,32 @@
   "build": {
     "appId": "com.residencial.sistema",
     "productName": "Sistema Condominio",
+
     "directories": {
       "output": "release"
     },
+
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+
     "linux": {
       "target": [
         "AppImage"
-      ]
+      ],
+      "category": "Utility"
     },
+
     "win": {
       "target": [
-        "nsis"
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
       ]
     }
   }
