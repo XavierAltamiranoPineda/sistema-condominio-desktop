@@ -11,7 +11,7 @@
     "electron:build": "tsc -p electron/tsconfig.json && tsc -p electron/tsconfig.preload.json",
     "electron": "concurrently \"npm run dev\" \"npm run electron:build && wait-on http://localhost:5173 && electron .\"",
     "build": "tsc -b && vite build",
-    "dist": "npm run build && NODE_ENV=production npm run electron:build && electron-builder --publish never"
+    "dist": "npm run build && cross-env NODE_ENV=production npm run electron:build && electron-builder --publish never"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -36,6 +36,7 @@
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.4",
     "concurrently": "^9.2.4",
+    "cross-env": "^10.1.0",
     "electron": "^41.7.1",
     "electron-builder": "^26.15.3",
     "oxlint": "^1.71.0",
@@ -48,24 +49,20 @@
   "build": {
     "appId": "com.residencial.sistema",
     "productName": "Sistema Condominio",
-
     "directories": {
       "output": "release"
     },
-
     "files": [
       "dist/**/*",
       "dist-electron/**/*",
       "package.json"
     ],
-
     "linux": {
       "target": [
         "AppImage"
       ],
       "category": "Utility"
     },
-
     "win": {
       "target": [
         {
