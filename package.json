@@ -48,7 +48,8 @@
   },
   "build": {
     "appId": "com.residencial.sistema",
-    "productName": "Sistema Condominio",
+    "productName": "Sistema-Condominio",
+    "asar": false,
     "directories": {
       "output": "release"
     },

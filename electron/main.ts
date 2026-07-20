@@ -43,13 +43,43 @@ function createWindow() {
 
     } else {
 
-        const indexPath = path.join(__dirname, "../dist/index.html");
+        const indexPath = path.join(
+            app.getAppPath(),
+            "dist",
+            "index.html"
+        );
+
+
+        console.log(
+            "AppPath:",
+            app.getAppPath()
+        );
+
+
+        console.log(
+            "Cargando archivo:",
+            indexPath
+        );
+
 
         mainWindow.loadFile(indexPath);
 
-        mainWindow.webContents.openDevTools();
-
     }
+
+    mainWindow.webContents.openDevTools();
+
+    mainWindow.webContents.on(
+        "did-fail-load",
+        (_, errorCode, errorDescription) => {
+
+            console.error(
+                "ERROR:",
+                errorCode,
+                errorDescription
+            );
+
+        }
+    );
 
 }
 
